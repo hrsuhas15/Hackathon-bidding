@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="include/headside.js"></script>
+    <link rel="stylesheet" href="include/side.css">
+    <style>
+      #map{
+        height:100% ;
+        width:100%;
+      }
+    </style>
+    <title>Home Page</title>
+</head>
+<body>
+      <div class=""><nav class="navbar navbar-expand-sm bg-dark navbar-dark " style="margin:10px;" inc="include/header.html"></nav></div>
+      <div class="row">
+
+          <div class="col-sm-12">
+               <div class="container">
+                 <div class="alert alert-dark" role="alert">
+                 Hello suhas,
+                </div>
+              </div>
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <div id="map"></div>
+                  </div>
+                    <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">Register</div>
+                                <div class="card-body">
+                                    <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+
+                       <div class="form-group row">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="phone_number" class="form-control">
+                                            </div>
+                                        </div>
+
+                       <div class="form-group row">
+                                            <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Address</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="permanent_address" class="form-control" name="permanent-address">
+                                            </div>
+                                        </div>
+
+
+
+                       <div class="form-group row">
+                                            <label for="full_name" class="col-md-4 col-form-label text-md-right">price</label>
+                                            <div class="col-md-6">
+                                                <input type="number" id="full_name" class="form-control" name="full-name">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Bid Date</label>
+                                            <div class="col-md-6">
+                                                <input type="date" id="bid_date" class="form-control" name="biddate">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group row">
+                                            <label for="Lat" class="col-md-4 col-form-label text-md-right">Lat </label>
+                                            <div class="col-md-6">
+                                                <input type="number" id="m" class="form-control"></input>
+                                                 <p id="u"></p>
+                                            </div>
+                                        </div>
+
+                                  <div class="form-group row">
+                                            <label for="lang" class="col-md-4 col-form-label text-md-right"> Lang </label>
+                                            <div class="col-md-6">
+                                                <input type="number" id="n" class="form-control"></input>
+                                                <p id="v"></p>
+                                            </div>
+                                        </div>
+
+
+
+
+                                            <div class="col-md-6 offset-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                Register
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+              </div>
+
+          </div>
+      </div>
+      <script>
+        function initMap()
+        {  x=document.getElementById('u');
+           y=document.getElementById('v');
+           // if (navigator.geolocation) {
+             //     navigator.geolocation.getCurrentPosition(function(position) {
+             //       var pos = {
+             //         lat: position.coords.latitude,
+             //         lng: position.coords.longitude
+             //       };
+             //     }
+             //  }
+          var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+          // Map options
+          var options = {
+            zoom:8,
+            center:{lat: 12.327, lng: 77.067}
+          }
+
+          // New map
+          var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+             marker = new google.maps.Marker({
+              map: map,
+               draggable: true,
+               animation: google.maps.Animation.DROP,
+               position: {lat: 12.327, lng: 77.067}
+             });
+             marker.addListener('click', toggleBounce(event));
+           }
+          function toggleBounce(event)
+          {
+            //x.innerHTML=event.latlang[0][1];
+            // x.innerHTML=22;
+            // y.innerHTML=event.latLng('lng');
+            if (marker.getAnimation() !== null) {
+              marker.setAnimation(null);
+            } else {
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+          }
+        //   google.maps.event.addListener(map, 'click', function(event) {
+        //        addMarker({coords:event.latLng});
+        //        x.innerHTML=myLatlng.lat();
+        //        y.innerHTML=myLatlng.lng();
+        //     });
+        //   // Listen for click on map
+        //   // google.maps.event.addListener(map, 'click', function(event){
+        //   //   // Add marker
+        //   //
+        //   // // });
+        //   // function addMarker(location, map) {
+        //   //   // Add the marker at the clicked location, and add the next-available label
+        //   //   // from the array of alphabetical characters.
+        //   //   var marker = new google.maps.Marker({
+        //   //     position: location,
+        //   //     label: labels[labelIndex++ % labels.length],
+        //   //     map: map
+        //   //   });
+        //   // }
+        //
+        //
+        //   /*
+        //   // Add marker
+        //   var marker = new google.maps.Marker({
+        //     position:{lat:42.4668,lng:-70.9495},
+        //     map:map,
+        //     icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        //   });
+        //
+        //   var infoWindow = new google.maps.InfoWindow({
+        //     content:'<h1>Lynn MA</h1>'
+        //   });
+        //
+        //   marker.addListener('click', function(){
+        //     infoWindow.open(map, marker);
+        //   });
+        //   */
+        //
+        //   // Array of markers
+        //   // var markers = [
+        //   //   {
+        //   //     coords:{lat:42.4668,lng:-70.9495},
+        //   //     iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        //   //     content:'<h1>Lynn MA</h1>'
+        //   //   },
+        //   //   {
+        //   //     coords:{lat:42.8584,lng:-70.9300},
+        //   //     content:'<h1>Amesbury MA</h1>'
+        //   //   },
+        //   //   {
+        //   //     coords:{lat:42.7762,lng:-71.0773}
+        //   //   }
+        //   // ];
+        //
+        //   // Loop through markers
+        //   // for(var i = 0;i < markers.length;i++){
+        //   //   // Add marker
+        //   //   addMarker(markers[i]);
+        //   // }
+        //
+        //   // Add Marker Function
+        //   function addMarker(props){
+        //     var marker = new google.maps.Marker({
+        //       position:props.coords,
+        //       map:map,
+        //       //icon:props.iconImage
+        //     });
+        //
+        //     // Check for customicon
+        //     if(props.iconImage){
+        //       // Set icon image
+        //       marker.setIcon(props.iconImage);
+        //     }
+        //
+        //     // Check content
+        //     if(props.content){
+        //       var infoWindow = new google.maps.InfoWindow({
+        //         content:props.content
+        //       });
+        //
+        //       marker.addListener('click', function(){
+        //         infoWindow.open(map, marker);
+        //       });
+        //     }
+        //   }
+        // }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDb3mMo95yysaDn7qGSClw_H2oxiCB3Nc&callback=initMap"async defer></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>includeHTML();</script>
+  </body>
+</html>
